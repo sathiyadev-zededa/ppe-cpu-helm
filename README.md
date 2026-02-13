@@ -63,4 +63,43 @@ The solution supports containerised and Kubernetes-based deployments with built-
 │
 └── Dockerfile
     └── Dockerfile for containerised deployment
+```
+# Dependencies
+All runtime dependencies and invocation details are defined in:
+
+Dockerfile
+
+wrapper_script.sh
+
+Please refer to these files for environment setup and inference execution.
+
+# Client Script (Example)
+
+Run the PPE detection client container using:
+```text
+docker run -it \
+  -e "video_stream=Safety_Full_Hat_and_Vest.mp4" \
+  -e "inference_server=172.16.8.48" \
+  -e "port=30002" \
+  commonpoc.azurecr.io/ppe-hardhat-client-amd64
+```
+
+# Environment Variables
+
+| Variable           | Description                 |
+| ------------------ | --------------------------- |
+| `video_stream`     | Input video file or stream  |
+| `inference_server` | Inference server IP address |
+| `port`             | Inference service port      |
+
+# Notes
+
+Use helmet_detection_yolov8_latest_v3.pt for helmet-only detection
+
+Use best_jacket_v1.pt for helmet and safety jacket detection
+
+Do not use helmet_jacket_detection_yolov8_latest_v2.pt
+
+Intended for PoC and edge deployments
+
 
